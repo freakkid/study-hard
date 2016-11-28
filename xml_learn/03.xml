@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<note>
+<to>George</to>
+<from>John</from>
+<heading>Reminder</heading>
+<body>Don't forget the meeting!</body>
+</note>
+
+
+<root>
+  <child>
+    <subchild>.....</subchild>
+  </child>
+</root>
+
+
+<note date="08/08/2008">
+<to>George</to>
+<from>John</from>
+</note>
+
+
+<!-- This is a comment -->
+
+<message> if a &lt; 1000 then</message>
+<!-- 实体引用： &lt; 就是 < -->
