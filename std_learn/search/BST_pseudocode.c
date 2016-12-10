@@ -80,3 +80,6 @@ void inOrder(BiTree *T) {
     visit T;
     inOrder(T->right);
 }
+
+// deleteMin()
+// 不断深入根节点的左节点，知道遇到空链接a，再把指向a的链接指向a的右子树
