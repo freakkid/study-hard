@@ -1,0 +1,681 @@
+
+
+~   转义字符
+    r'...'默认内部符号不转义
+        r'''...'''
+~ 使用更多格式化字符,
+    eg %r:不管什么都打印出来,\n在%r下也是直接打出来而不是换行,还带有单引号(字符串)
+
+~   若是 print "%r" %()
+    打出来的结果外面有单引号
+    若是 print "string", ()
+    打出来结果就没有单引号
+~   one = "one"
+    two = "two"
+    three = one + two
+   #four = one, two
+
+    print one, two  // one two
+    print "one", "two" // one two
+    print one + two // onetwo
+    print three     // onetwo
+   #print four      // ('one', 'two')//if has '\n',will print '\n' instead of enter
+    print "%r%r" %(one,two)  //'one''two'
+    print "%r" %three  // 'onetwo'
+   (#:特殊例子)
+   
+    
+~   类型强制转换
+    age = int(raw_input("可以输出这里的字符串",n)
+    n是表示输入几进制的数字
+    
+ ~  最后一行末尾留有逗号,是允许的
+ 
+ ~  可以print 后面不加任何东西,默认打印出一个空行
+ 
+ ~  readline - 读取一行
+    truncate - 清空文件
+    
+ ~  open(filename, "r"/"w"/"a")
+ 
+ ~  关于函数:
+    函数名必须以下划线或字母开头，可以包含任意字母、数字或下划线的组合。不能使用任何的标点符号；
+    不能是保留字；
+    函数定义的对象属局部作用域，只在函数内有效，不会影响全局作用域中的对象；
+    赋值对象属局部作用域，除非使用global关键字进行声明；
+    LGB规则是Python查找名字的规则，下面是LGB规则：大多数名字引用在三个作用域中查找：先局部(Local)，次之全局(Global)，再次之内置(Build-in)；如想在局部作用域中改变全局作用域的对象，必须使用global关键字；
+    
+    函数是一个变量
+
+~   关于seek()
+    seek()方法在偏移设定该文件的当前位置。参数是可选的，默认为0，文件开头，它的值如果是1，这意味着寻求相对于当前位置，2表示相对于文件的末尾。
+    没有返回值；
+    如果该文件被打开或者使用'a'或'A+'追加，任何seek()操作将在下次写撤消；
+    如果该文件只打开使用“a”的追加模式写，这种方法本质上是一个空操作，但读使能(模式'a+')，它仍然在追加模式打开的文件非常有用；
+    如果该文件在文本模式下使用“t”，只有tell()返回的偏移开都是合法的。使用其他偏移会导致不确定的行为；
+    请注意，并非所有的文件对象都是可搜索；
+    
+~   list 指向可变
+    tuple 指向不可变,但指向的内容可变,比如 指向一个list,list可变
+    set 与 dict.key 指向不可变,指向的内容也不可变,因此里面不能指向一个list,或者有包含list的数据类型
+
+
+~   生成器(generator)
+    一边循环一边计算的方式
+    它是在for循环的过程中不断计算出下一个元素，并在适当的条件结束for循环
+    定义:
+    法一: g = (x * x for x in range(10))
+    法二: def fib(max):
+            n, a, b = 0, 0, 1
+            while n < max:
+                yield b
+                a, b = b, a + b
+                n = n + 1
+    +++++++++++++++++++++++++++++++++++++++++++++++++
+    send(msg)
+    
+    def h():
+        print "ss"
+        m = yield 5
+        print m
+        d = yield 12
+        print "ww"
+
+    c = h()
+    m = c.next()  # 相当于 c.send(None)
+                  # m 获得参数值5
+    d = c.send("ll") # d 获得参数值 12
+    ss
+    ll
+    ww
+    第一次调用要用next()或send(None)
+    +++++++++++++++++++++++++++++++++++++++++++++++++
+    
+    *输出所有元素
+    不能直接 g
+    法一: 不断g.next()
+    法二: for n in g:
+            print n
+    
+    *def odd():
+        print 'step 1'
+        yield 1
+        print 'step 2'
+        yield 2
+        print 'step 3'
+        yield 3
+    
+   *判断 isgeneratorfunction 是否为一个generator函数
+    
+~   列表
+
+    L = []
+    for x in range(9)
+        L.append(x * x)
+    L
+    等价于   *列表生成式
+    [x * x for x in range(9)]
+    #筛选出偶数
+    [x * x for x in range(1, 11) if x % 2 == 0]
+    #两层循环
+    [m + n for m in 'ABC' for n in 'XYZ']
+    #[s.lower() for s in L]
+    
+    +++++++++++++++++++++++++++++++++++++++++++++++++
+    one　= range(0, 5) #等于给one赋值０～４
+    
+    print one　　　　　          #[0, 1, 2, 3, 4]
+    
+    for i in one:
+        print "%d" % i      #0  1  2  3  4(元素之间是换行)
+    +++++++++++++++++++++++++++++++++++++++++++++++++    
+    append()  #　＊append(obj) 追加元素；
+                ＊append(list) 追加列表：
+                  one = [1, 2, 3, 4]
+                  two = [5, 6, 7]
+
+                  one.append(two)
+
+                  print one　　　　#[1, 2, 3, 4, [5, 6, 7]]
+                  追加的two整个列表被当做一个元素来看待，也就是说
+                  one里面是５个元素而不是７个
+                  
+                 ＊追加tuple  
+                 
+                 *list1 + list2  # 两个列表组合在一起 
+    +++++++++++++++++++++++++++++++++++++++++++++++++      
+    count()     # list.count(obj) 用于统计某个元素出现的次数
+    +++++++++++++++++++++++++++++++++++++++++++++++++ 
+    extend()    # list1.extend(list2) 在list1后面追加list2（只能是列表）的内容
+    +++++++++++++++++++++++++++++++++++++++++++++++++ 
+    index(obj)     # 从列表中找出某个值第一个匹配项的索引位置
+    +++++++++++++++++++++++++++++++++++++++++++++++++ 
+    insert(index, obj)  # 将对象插入列表
+    +++++++++++++++++++++++++++++++++++++++++++++++++ 
+    pop(obj = list[-1]) # 删除最后一个元素，再返回该元素的值
+    pop(n)  #　删除第n - 1个元素
+    +++++++++++++++++++++++++++++++++++++++++++++++++ 
+    remove(obj) #　移除列表中某个值的第一匹配项
+    ＊删除所有制定元素：
+    while 2 in List:
+        List.remove(2)
+        
+    +++++++++++++++++++++++++++++++++++++++++++++++++ 
+    list.reverse()   # 反转列表中的元素
+    +++++++++++++++++++++++++++++++++++++++++++++++++ 
+    list.sort([func])      # 对原列表进行排序
+    ＊ 修改原序列
+    a = [3, 2, 1]
+    b = a          # b和a指向同一个列表
+    b.sort()
+    a  #[1, 2, 3]
+    
+    ＊不修改原序列的方法
+    *(1)用sorted()函数
+    b = sorted(a)
+    *(2)创建副本
+    b = a[:]
+    b.sort()
+    
+    ＊关键字排序：key
+    list = ['a', 'cccc', 'aa']
+    list.sort(key = len)
+    list        #['a','aa','cccc']
+    ＊关键字排序：reverse()
+    list = [3, 2, 13]
+    *降序　True
+    list.sort(reverse = True)
+    [13, 3, 2]
+    *升序　False
+    list.sort(reverse = False)
+    [2, 3, 13]
+                           
+    +++++++++++关于sorted+++++++++++
+    def reversed_cmp(x, y):
+    if x > y:
+        return -1
+    if x < y:
+        return 1
+    return 0
+
+    L = [2, 3, 1, 7, 3, 1, 5, 0, 1, 6, 4, 8, 4, 9]
+
+    print sorted(L) # 正序排列
+    print sorted(L, reversed_cmp) # 逆序排列
+    
+    +++++++++++++++++++++++++++++++++++++++++++++++++ 
+    *del obj    #　删除某个元素
+    *len(list)  #　列表中元素的个数
+    
+    *list1 = list2 * 2 # 列表的重复
+    区分：　list1 = list2[3] * 4  #list1不是一个列表
+            list1 = [list2[3]] * 4
+    *3 in [1, 2, 3]   True
+    *List[-2] 读取倒数第二个元素
+    +++++++++++++++++++++++++++++++++++++++++++++++++
+    *List[1:] (等价于List[1:end])从第二个元素开始截取列表
+     List[:2] （等价于List[0:2]）前两个元素
+     List (等价于 List[:]  List[beg:end])
+    *List[2:2] = [1, 2, 3](插入1, 2, 3每个元素)
+    　区别：List.insert(2, [1, 2, 3])(插入一个元素[1,2,3])
+    *L[::2] 每两个取一个
+    *(0,1,2,3,4,5)[:3]
+     'ABCDEF'[:3]
+     
+   　++++++++++++++++++++++++++++++++++++++++++++++++
+    *cmp(list1, list2) 比较两个列表的元素
+    比较大小看返回值
+    比较对象是元素首字符的ascii值
+    +++++++++++++++++++++++++++++++++++++++++++++++
+    *max(list) 返回元素最大值
+    *min(list) 返回元素最小值
+    *list(seq)  将元组转成列表
+    +++++++++++++++++++++++++++++++++++++++++++++++
+    
+    
+    
+~   集合
+    set()           #　列出列表中不重复的元素集合
+    list1 = [1, 1, 2, 2, 2 ,3]
+    list2 = set(list1)
+    print list2     # set([1, 2, 3])
+    print list2[2]  # 报错：set之后元素无序，是集合
+    
+    ++++++++++++++++++++++++
+    s = set([1, 2, 3])  
+    print s #([1,2,3])
+    添加元素:s.add(4)
+    删除元素:s.remove(4)
+    
+    
+    
+~   split()     #分割
+    join()
+
+~   字典
+    *参见ex40.py系列!!!!!!!!
+    *len(dict)  dict个数
+    
+    *浅拷贝
+    new_dict = dict.copy()
+     深拷贝
+    
+    *删除key对应的键值对
+    有返回值
+     new_dict.pop(key)
+    没有返回值
+     del new_dict[key]
+    
+    *合并两个字典
+     dict1.update(dict2)
+     
+    *元组1
+     turple = (["first", "Google"], ["second", "Yahoo"])
+     dict1 = dict(turple)
+     print dict1    # {'second': 'Yahoo', 'first': 'Google'}
+    *fromkeys(重新创建一个新的dict)
+     dict1 = {}.fromkeys(("third","forth"), "facebook")
+     print dict1    # {'forth': 'facebook', 'third': 'facebook'}
+     
+    *key
+     为保证hash的正确性,作为key的对象就不能变
+     字符串整数不可变
+     列表不能作为key,列表可变
+    *删除一个key,用pop(key)
+     dict.get(key) #若不存在则返回None(看起来就是什么都没有)
+     dict.get(key, -1) #返回-1
+     
+     
+     ++++++++++++++++++
+     关联数组
+     
+~   随机生成数
+    *from random import randint
+     number = randint(0, 100)
+     产生0 <= n >= 100之间的数字
+    *随机生成0~100之间的偶数
+     ran
+     
+~   *from sys import exit
+     exit(0)
+    
+    
+    
+~   字符串
+    
+    ord('A')    #65
+    chr(65)     #'A'
+    添加了对Unicode的支持
+    print u'中文'     #中文
+    u'中'             #u'\u4e2d'   十六进制的Unicode
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++
+    把Unicode转成utf-8
+    u'ABC'.encode('utf-8')
+    把utf-8转成Unicode
+    '\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8')   #u'\u4e2d\u6587'
+    print '\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8')
+    中文
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+    len()返回字符串长度
+    
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++
+    a = 'abc'
+    a.replace('a', 'A') # 'Abc'
+    a # 'abc'
+    
+~   unicode(100) #u'100'
+    bool(1) True
+
+        
+~   a = abs   #变量a指向abs函数
+    a = a(-1) #所以也可以通过调用a调用abs函数
+    
+~   判断一个对象是否是一个已知类型
+    isinstance(A, type)
+    isinstance(A, (type1, type2))
+    int ,str
+~   raise TypeError("...")  # 报错
+~   函数
+    *可以返回多个值,其实就是返回一个tuple
+    *默认参数
+    def pow(x, n = 2):
+        s = 1;
+        while n > 0:
+            n = n - 1;
+            s = s * x
+        return s
+    
+    默认参数是一个变量,必须指向不变对象
+    
+    *可变参数:传入参数个数是可变的,可以0~多个 
+     不可变参数: def cal(number)
+         cal([1, 2, 3])
+         number只能是一个列表,不可以没有传递参数
+         
+     可变参数: def cal(*number)
+         cal(1, 2, 3)
+         number是一个tuple,也可以是不传递参数
+     如果要传递进一个列表,则
+        cal(*number)或cal(num[0], num[1], num[2])
+   
+   
+   *函数作为返回值
+    def lazy_sum(*args):
+    def sum():
+        ax = 0
+        for n in args:
+            ax = ax + n
+        return ax
+    return sum
+
+    f = lazy_sum(1, 3, 5, 7, 9)
+    print f()
+    f1 = lazy_sum(1, 2, 3, 4, 5)
+    print f1 == f   # False
+   
+   *闭包
+   返回的函数在其定义内部引用了局部变量args, 所以当一个函数返回一个函数后,其内部的局部变量还被新函数引用
+   ### 返回的函数没有立即执行直到调用了f()才执行
+   python的函数只有在执行时，才会去找函数体里的变量的值
+   def count():
+    fs = []
+    for i in range(1, 4):
+        def f():
+                return i * i
+        fs.append(f)    # 返回的函数值引用了i,没有立即执行
+    return fs           # 等3个函数的返回时,i已经变成了3,因此结束为9
+    f1, f2, f3 = count()
+    print f1()      #9
+    print f2()      #9
+    print f3()      #9
+    
+    
+    
+    ##返回函数不要引用任何循环变量,或者后续会发生变化的变量##
+    
+    ###一定要用循环变量:
+    *法一:
+    def count():
+    fs = []
+    for i in range(1, 4):
+        def f(j):       # 再创建一个函数,参数绑定循环变量当前的值,无论该变量后续如何更改,已绑定到函数参数的值不变
+            def g():
+                return j * j
+            return g
+        fs.append(f(i))
+    return fs
+
+    f1, f2, f3 = count()
+    print f1()      #1
+    print f2()      #4
+    print f3()      #9
+    
+    *法二:
+    def count():
+    fs = []
+    for i in range(1, 4):
+        def g(j = i):
+            return j * j
+        fs.append(g)
+    return fs
+
+    f1, f2, f3 = count()
+    print f1()      #1
+    print f2()      #4
+    print f3()      #9
+    
+    #可用lambda函数缩短代码
+    
+    
+    ### 闭包是不能修改外部作用域的局部变量
+    def foo():
+    m = 0
+    def foo1():
+        m = 1
+        print m
+    print m         # 0
+    foo1()          # 1
+    print m         # 0
+
+    foo()
+    
+    ### 所有在赋值语句左边的变量都是局部变量
+    def foo():
+    a = 1
+    def foo1():
+        a = a + 1   #左边的a是局部变量,找不到右边的a
+        return a
+    return foo1
+
+
+    c = foo()
+    print c()
+    # UnboundLocalError: local variable 'a' referenced before assignment
+    改正:
+    def foo():
+    a = [1]
+    def foo1():
+        a[0] = a[0] + 1
+        return a[0]
+    return foo1
+
+
+    c = foo()
+    print c()
+
+   +++++++++++++++++++++++++++++++
+   作用1: 当闭包执行能够完成后可以保持住当前的运行环境
+   作用2: 闭包可以根据外部作用域的局部变量来得到不同的结果
+   def make_filter(keep):
+    def the_filter(file_name):
+        file = open(file_name)
+        lines = file.readlines()
+        file.close()
+        filter_doc = [i.strip() for i in lines if keep in i]
+        return filter_doc
+    return the_filter
+
+    filter = make_filter("def")
+    fn = raw_input()
+    filter_result = filter(fn)
+    print filter_result
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    def outer():
+        x = 1
+        def inner():
+            print x
+        return inner
+    
+    foo = outer()
+    foo.func_closure
+    ##正常运行##
+    嵌套定义在非全局作用域的函数能够记住它在被定义的时候所处的封闭命名空间
+    
+
+~   匿名函数:没有名字,不必担心函数名冲突
+    print map(lambda x: x * x, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+    
+    lambda x: x * x
+    等价于:
+    def f(x):
+        return x * x
+    +++++++++
+    def build(x, y):
+        return lambda: x * x + y * y
+    f = build(1, 2)
+    
+    或 f = lambda x, y: x * x + y * y
+    f(1, 2)
+   
+   
+~   关键字参数
+    允许0~多个关键字参数,在函数内部自动组装为一个dict
+    def person(name, age, **kw):
+        print 'name:', name, 'age:', age, 'other:', kw
+    eg.    person('M', 12)
+    eg.    person('M', 12, city = 'BJ')
+       #            {'city': 'BJ'}
+    eg.    person('M', 12, city = 'BJ', job = 'EE')
+    
+    eg.    kw = {'city': 'BJ', 'job': 'EE'}
+           person('Jack', 12, **kw)
+           person('Jack', 12, city = kw['city'], job = kw['job'])
+    
+~   参数组合:
+    顺序:    必选参数 默认参数 可变参数 关键字参数
+    def fun(a, b, c = 0, *args, **kw):
+        print 'a=', a, 'b=', b, 'c=', c, 'args=', args, 'kw=', kw
+    通过一个tuple和dict调用该函数:
+    args = {1, 2, 3, 4}
+    kw = {'x': 99}
+    func(*args, **kw)
+    
+~   from collections import Iterable
+    isinstance('abc', Iterable) # str是否可迭代    
+    
+~   import os
+    [d for d in os.listdir('.')]
+    #列出文件和目录
+报错收集:
+    StopIteration  异常 是在循环对象穷尽所有元素时的报错
+
+~   map
+
+    def f(x):
+        return x * x
+    map(f, [1, 2, 3, 4, 5, 6, 7, 8])
+    # [1, 4, 9, 16, 25, 36, 49, 64]
+    
+    map(str, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+    # ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+~   reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
+    
+~   strip()
+   *s为字符串,rm 为要删除的字符序列
+    s.strip(rm)     删除s字符串中开头/结尾处, 位于rm 删除序列的字符
+    s.lstrip(rm)    删除s字符串中开头处, 位于rm删除序列的字符
+    s.rstrip(rm)    删除s字符串中结尾处, 位于rm删除序列的字符
+    rm为空时,删除空白字符:'\n', '\t', '\r', ' '
+    eg.
+    s = "aaaaaaaaaaaaalnuomk\n"
+    d = s.strip("alnuo")
+    print d # mk
+   
+~   filter 过滤器
+
+   *def is_odd(n):
+        return n % 2 == 1      #删除偶数,留下奇数
+    def not_empty(s):
+        return s and s.strip() #删除序列中的空字符串(' '或None)
+    filter(is_add, [1, 2, 3, 4])
+
+~   @修饰符
+    调用一个函数参数为下行的变量,并且替换它
+    class A:
+        @staticmethod
+        def m(self):
+            pass
+    相当于:
+    class A:
+        def m(self):
+            pass
+        m = staticmethod(m)
+
+
+~   装饰器   Decorator
+    def log(func):
+    def wrapper(*args, **kw):
+        print 'call %s():' % func.__name__
+        return func(*args, **kw)
+    return wrapper
+
+    @log                #now = log(now)
+    def now():
+        print '2013-12-25'
+
+    now()
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    import functools
+
+    def log(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            print 'call %s:' % func.__name__
+            return func(*args, **kw)
+        return wrapper
+
+    import functools
+
+    def log(text):
+        def decorator(func):
+            @functools.wraps(func)
+            def wrapper(*args, **kw):
+                print '%s %s():' % (text, func.__name__)
+                return func(*args, **kw)
+            return wrapper
+        return decorator
+
+~   偏函数functools.partial
+    把一个函数的某些参数给固定住(默认值),返回一个新函数
+    int('123', base = 8)
+    int('123', 16)
+    
+    def int2(x, base = 2):
+        return int(x, base)
+    
+    functools.partial就是创建一个偏函数,不需要自己定义int2()
+    import functools
+    int2 = functools.partial(int, base = 2)
+    int2('100000')
+    相当于:kw = {base: 2}
+    int('100000', **kw)
+    
+    max2 = functools.partial(max, 10)
+    max2(5, 6, 7)
+    实际上会把10作为*args的一部分自动加到左边
+    相当于:args = (10, 5, 6, 7)
+    max(*args)
+
+~   python取模运算结果为非负数
+
+
+~   Error 收集：
+    1.##概念混淆：
+        datas = [['a','b'], ['c','d']]
+        
+        a = []
+       *a.append([i for i in datas])
+        print a     #  [[['a','b'], ['c','d']]]
+        b = []
+        b.append(datas)
+        print b     #  [[['a','b'], ['c','d']]]
+        c = []
+       *for i in datas:
+            c.append(i)
+        print c     #  [['a','b'], ['c','d']]
+
+    2.## 生成器（generator）
+        #下面两个等价
+        print [i for i in datas]
+        print [datas[i] for i in range(len(datas))]
+        # 下面那个是生成器
+        print (i for i in datas)
+
+
+
+出现的错误:
+* var(多个参数之间没有加上逗号分隔)
+* 习惯性在行末打出分号
+* 在行首多加了一个空格
+
+* 变量名打错= =
+* 函数定义的时候忘记在参数的右括号后面加上:
+* if 和 while 后面忘记加冒号
+* if else 中的缩进问题
+* False 的首字母应该大写
+Question:   
+# 
+# 
+

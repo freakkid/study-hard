@@ -1,0 +1,86 @@
+#1.Constructor
+
+def __init__(self, holder, number, balance, credit_line = 1500):
+    self.Holder = holder
+    self.Number = number
+    self.Balance = balance
+    self.CreditLine = credit_line
+
+from Account import Account
+x = Account()
+print x     # <Account.Account object at 0x7f364120ab90>
+
+#2.Destructor
+
+class Greeting:
+    def __init__(self, name):
+        self.name = name
+    def __del__(self):      # 当所有的引用都del的时候就会调用
+        print "Destructor started"
+    def SayHello(self):
+        print "Hello", self.name
+eg. x1 = Greeting("Guiso")
+    x2 = x1
+    del x1
+    del x2
+    # "Destructor started"
+
+# 3.整体
+class Account(object):
+
+    def __init__(self, holder, number, balance, credit_line = 1500):
+    self.Holder = holder
+    self.Number = number
+    self.Balance = balance
+    self.CreditLine = credit_line
+    
+    def transfer(self, target, amount):
+        if(self.Balance - amount < -self.CreditLine):
+            # converage insufficient
+            return False
+        else:
+            self.Balance -= amount
+            target.Balance += amount
+            return True
+    
+    def deposit(self, amount):
+        self.Balance = amount
+        
+    def withdraw(self, amount):
+        if(self.Balance - amount < -self.CreditLine):
+            # coverage insufficient
+            return False
+        else:
+            self.Balance -= amount
+            return True
+    
+    def balance(self):
+        return self.Balance
+    
+#4.encapsulation(包装)
+
+class Encapsulation(object):
+    def __init__(self, a, b, c):
+        self.public = a
+        self._protected = b # 类外可以看见，但不能调用
+        self.__private = c  # 不能在类外被看见和调用
+#调用__private报错：
+AttributeError: 'Encapsulation' object has no attribute '__private'
+
+    
+#5. class and object variables
+
+class Account(object):
+    counter = 0
+    def __init__(self, holder, number, balance, credit_line = 1500):
+        Account.counter += 1    # 创建一个新对象的时候加1，引用的时候不变化！！！
+        self.Holder = holder
+        self.Number = number
+        self.Balance = balance
+        self.CreditLine = credit_line
+    
+    def __del__(self):
+        Account.counter -= 1
+        
+        
+

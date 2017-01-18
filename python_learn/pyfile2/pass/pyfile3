@@ -1,0 +1,297 @@
+http://python-course.eu/history_and_philosophy.php
+
+1．　可以直接进行复数的计算
+
+2．　string 是不可以被改变里面的字符的
+
+3．　== 判断的是值
+      is 判断的是id
+      字符串中，若有"符号 + 字母/数字"的组合,is就会是False
+
+4．　~取反　　~3 = -4
+
+5.              输入数字
+
+    input() 　　　　int (type)
+    raw_input() string (type)
+    
+6.   max = (a > b) ? a : b   # c code
+     max = a if a > b else b # python
+
+7.   import random
+     random.random()返回一个[0,1)之间的实数
+     要得到一个 1~n之间的整数：int(n * random.random()) + 1
+
+8.   while ....:
+          ....
+          ....
+     else:
+          ....
+
+10.   s[begin: end: step]
+
+11.     列表
+        list = list1 + list2　　# 可以相加得到新列表
+        list = n * list1
+        
+
+        x = ['a','b','c']
+        y = [x] * 4
+        x[0] = 'd'
+        y[0][0] = 'o'
+        
+        # 都会改变x[0]
+        # y[0] y[1] y[2] y[3]都指向 x
+               
+12.     字符串
+        3 * str
+
+13.     集合
+       *c = set([])     # 可变的
+        c.add()         # 可以添加元素
+        ------------------------------
+        d = frozenset([]) # 不可变的
+        d.add()           # 报错
+        
+       *s.clear()         # set([])
+        c = s.copy()      # 浅复制
+        c.clear()         # 不影响s
+        --------------------------
+        c = s             # 深复制
+        c.clear()         # s = set([])
+        
+       *差集
+       　　x.difference(y)
+       　　x - y
+       * x.difference_update(y)
+         x = x - y
+         
+       * 删除元素
+       　 s.discard(x)   # if　x in s删除　else do nothing
+       　 s.remove(x)    # if x in s删除  else KeyError
+
+       * x.intersection(y)
+         x & y
+       
+       * 是否有交集
+         x.isdisjoint(y)    # 有　False 无　True
+         是否为子集
+         x.issubset(y)      # x是y的子集　True 
+         x < y 
+         x <= y
+         是否为超集
+         x.issuperset(y)
+         x > y
+         x >= y
+       * x.pop()    #　x 为空则KeyError
+       　 
+       　 
+       　 
+14.     字典
+        * key 不可以是　list  !!!
+        * del dict[key]  # 删除元素
+        * dict.clear()   # {}
+        * dict1 = dict.copy() # 浅复制
+        * dict1.update(dict) #dict1添加key不冲突的dict中的元素
+        　字典不存在加法运算
+        * iterkeys()    itervalues()    items()
+        
+        * items()     keys()     values()　　# 列表形式～
+        　# [('a','b'),('c','d')]  ['a','c']   ['b','d']
+        
+        * k = ['a','b','e']  v = ['c','d']
+          l = zip(k, v)   #  [('a','c'),('b','d')]
+          d = dict(l)     # 变成字典
+        * 
+
+15.     深复制/浅复制
+       
+      * python参数传递都是“传对象引用”的方式。
+        实际上是相当于 传值（赋值） 和 传引用 的一种综合；
+        如果函数收到可变对象的引用（如字典或列表），就能修改对象的原始值 == “传引用”
+        如果是不可变对象的引用（数字/字符/元组），就不能直接修改原始对象 == “传值”
+      * 复制列表或字典时，复制对象列表的引用，如果改变引用的值，会修改原始的参数
+        每个对象都有一个引用计数，计数被引用多少次。每当引用一次对象，相应的引用计数+1;每次销毁一次对象，则-1；只有当引用计数为0，才真正从内存中删除python对象
+        
+      * 关于 = 
+        相当于传引用
+        a = ['a','b,c','d']
+        b = a
+        b[0] = 'c'
+        a[1][0] = 'e'
+        a 和 b做任何修改都会影响彼此
+        
+        # 但如果a或b重新指向一个新对象
+        c = [1,2,3]
+        a = c
+        则b不变，此时是a指向新对象，不是a修改了原始对象数据
+        
+      * 关于copy()和deepcopy()
+
+        c = copy.copy(a)        
+        相当于： c = a[:]
+        #c 对 a 的元素修改第一层不会影响彼此
+         eg. a[0] = 'd',c.append('f')
+        
+        #但是如果修改第二层
+         eg. a[1][0] = 'd',c[1][0] = 'g'
+         就会影响到彼此
+      --------------------------------------
+        d = copy.deepcopy(a)
+        d 是一个自由的新对象，他和a互不干涉，毫无关联
+      
+      * c1 = ["a","b"]
+        c2 = c1
+        
+        c2 = ["c","d"]
+        # c2 重新指向一个新列表，不会改变原来的列表，c1ｂｕｂａｉｎ
+        ----------------
+        c2[1] = "c"
+        # c2改变了原来列表中的一个元素，c2还是指向原来的列表，指向不变
+        　　影响了c1,c1发生了改变
+        　　
+       * l1 = ['a','b','c','d']
+         l2 = l1[:]
+         l2[1] = 'e'
+         # l1不改变
+        ------------------------
+         l1 = ['a','b',['aa','bb']]
+         l2 = l1[:]
+
+
+16.    函数
+      *func.__doc__   #函数文本说明
+      
+      *根据参数名传参
+       def sumsub(a, b, c = 0, d = 0)
+       可以这样：sumsub(12,2,d = 4, c = 5)
+      
+      *可以传入多个值，返回多个值（tuple形式）
+       def f(x, y, z)
+       p = (1,2,3)
+       f(*p)
+
+      *默认参数 
+       一定是不可变对象
+       
+      *可变参数:传进0～多个参数，自动组装(*)成一个tuple
+       def cal(*num):
+       
+       eg.fuct(a, b, c)
+          tuple = (1,2,3)  /  list = [1,2,3]
+          fuct(*tulpe)  /  fuct(*list)
+          kw = {1:'s',l:'a',d:'s'}
+          fuct(**kw)
+          t = (1,)    d = {'x':'d', 'a':'w'}
+          fuct(*t,**d)
+       *关键字参数:传进0~多个含参名的参数，自动组装(**)成一个dict
+       def person(name,age,**kw):
+       eg.
+       person('Bob', 35, city = 'BeiJIng')
+                      
+                      #  {'city':'BeiJing'}
+       
+       kw = {'city':'BeiJing'}
+       person('Bob', 35, city = kw['city'])
+       person('Bob', 35, **kw) 
+        
+       +++++++++++++++++++++++++++++++++++++++++++++++++++++
+       
+        foo(arg1, arg2 = 'ok', *tupleArg, **dictArg):
+        可以把tupleArg, dictArg看成两个默认参数，多余的非关键字参数，调用时被放在tupleArg中，多余的关键字参数，函数调用时被放在dictArg中
+        
+        如果使用 *元组参数或 **字典参数，应该放在参数列表最后；但如果元组对象前面不带 * ，字典对象如果前面不带 ** ,则作为普通对象传递参数
+        多余的普通参数 ：
+        def foo(arg1,arg2="OK",*tupleArg,**dictArg):
+        myList=["my1","my2"]
+        myDict={"name":"Tom","age":22}
+        foo(123,myList,myDict)
+        结果： arg1 = 123, arg2 = ['my1','my2']
+               tuple:index:0-->{"name":"Tom","age":22}
+       #123赋给arg1, myList 赋给 arg2, myDict 赋给 myList
+       
+       
+       
+17.     gobal
+        def f():
+            global s
+            print s
+            s = 'new'
+            print s
+        
+        s = 'pre'
+        f()
+        print s
+        # pre new new
+        通过 gobbal, s 被改变
+       
+       
+       
+18.     文件IO
+    # 保存进文件
+import pickle
+data = (1.4, 42, 'string')
+output = open('data.pkl', 'w')
+pickle.dump(data, output, 2)
+output.close()       
+    # 输出文件内容
+import pickle
+f = open('data.pkl')
+data = pickle.load(f)
+print data
+f.close()       
+       
+       
+19.     reduce()        
+        求最大值：reduce(lambda a, b: a if a > b else b)
+        求和：reduce(lambda x, y: x + y, range(1, 101))
+        
+        
+20.     range()
+        生成列表
+        xrange()
+        生成一个生成器，适合在需要生成很大序列数字的时候
+        a = xrange(0, 100)
+        type(a)      # <type, 'xrange'>
+        print a      # xrange(100)
+        print a[0], a[1]  # 0 1
+        
+        
+21.     a, b = 1, 0
+        a, b = b, a
+        print a, b
+        # 可以这样交换
+
+
+22.     list("list")----->['l','i','s','t']
+
+23.     
+def fibonacci():
+    a, b = 0, 1
+    while True:
+        yield a
+        a, b = b, a + b
+        
+def firstn(g, n):
+    for i in range(n):
+        yield g.next()
+
+print list(firstn(fibonacci(), 10))
+
+24.     AssertionError
+        assert <some_test>, <message>
+        
+25.     extend()是一个迭代器方法，作用于迭代器，并把参数追加迭代器后面
+        只接受一个列表作为参数，并将参数的每个元素都添加到原有的列表中
+
+26.     re.match(r'正则表达式', 'test')
+        匹配是否成功，成功返回一个Match，不成功返回None
+        
+        'a b  c'.split(' ')
+        # ['a', 'b', ' ', ' ', 'c']
+        # 无法识别连续空格
+        re.split(r'\s+', 'a b  c')
+        # ['a', 'b', 'c']
+        
+        
+enumerate

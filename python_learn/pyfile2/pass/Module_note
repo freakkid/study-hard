@@ -1,0 +1,78 @@
+Module模块
+一个文件就是一个模块,好处:维护性;编写代码不必从0开始,当一个模块编写完毕,就可以被其他地方引用.引用python内置模块和第三方模块;
+避免函数名和变量名冲突:相同名字的函数和变量可以分别存在不同的模块中,但要避免和内置函数冲突.
+
+避免模块名相同的冲突:包(Package)   按目录来组织模块的方法
+eg.  abc.py文件就是一个叫 abc 的模块
+选择一个顶层包名,eg.mycompany
+只要顶层包名不与别人冲突,所有模块都不与别人冲突
+abc.py变成abc.mycompany
+
+#每个包目录下必须有一个_init_.py的文件#
+
+可以有多级目录,组成多级目录,组成多级层次的包结构
+mycompany/web/www.py模块名 :mycompany.web.www
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#!/usr/bin/env python       #前2句标准注释
+# -- coding: utf-8 --
+
+'a test module'             #任何模板代码的第一个字符串都被视为模块的文档注释
+
+_author_ = Liao
+
+import sys
+
+def test():
+    args = sys.argv
+    if len(args) == 1:
+        print "Hello, world!"
+    elif len(args) == 2:
+        print 'Hello, %s!' % args[1]
+    else:
+        print 'Too many arguments!'
+
+if _name_ == '_main_'       #在命令行运行hello模块文件,把_name_置为_main_ , 而在其他地方导入该hello模块时,if判断将失败
+    test()
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++
+如果想要改变被导入模组在当前模组中的名称,而不是sys.modules中的名称
+import some as other(别名)
+
+try:
+    import cStringIO as StringIO    #优先使用cString
+except ImportError:     #导入失败会捕获到ImportError
+    import StringIO
+
+
+try:
+    import json # python >= 2.6
+except ImportError:
+    import simplejson as json
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+作用域
+
+_前缀
+1. 正常的函数和变量名是公开的,eg: abc, x123, PI
+2. __xxx__ 特殊变量,特殊用途,可以直接引用, 一般不用这种变量名 eg: __author__, __name__, __doc__
+3. _xxx, __xxx非公开(private)的,不应该直接被引用
+private函数和变量的作用
+def _private_1(name):
+    return 'Hello, %s' % name
+def _private_2(name):
+    return 'Hi, %s' % name
+def greeting(name):
+    if len(name) > 3:
+        return _private_1(name)
+    else:
+        return _private_2(name)
+
+代码封装和抽象的方法
+外部不需要引用的函数全部定义为private, 只有外部需要引用的函数才定义为public
+
+
